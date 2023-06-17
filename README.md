@@ -22,6 +22,16 @@ applying a unitary rotation *-iσ<sup>y</sup>* to spins[^1] on every sublattice-
 The tensors in the dataset **single-site_pg-C4v-A1_internal_U1** also possess U(1) symmetry [see [SciPost Phys. 10, 012 (2021)](https://scipost.org/SciPostPhys.10.1.012)]. 
 The states are stored in plain text format (JSON).
 
+# Observables
+
+Each state is accompanied by corresponding *.dat file containing the value of selected observables
+as evaluated by corner transfer matrix algorithm implemented in [``peps-torch``](https://github.com/jurajHasik/peps-torch) library.
+For a set of environment bond dimensions χ, those are
+* energy per site of J<sub>1</sub>-J<sub>2</sub> model[^2]
+* on-site magnetization m=|⟨S⟩|, with S=(S<sup>z</sup>,S<sup>x</sup>,S<sup>y</sup>) the vector of spin-1/2 operators
+* leading eigenvalues λ<sub>0</sub>, λ<sub>1</sub>,... of (width-1) transfer matrix. The spectrum is normalized (λ<sub>0</sub>=1)
+  and the leading correlation length can be obtained as ξ = -1/ln(λ<sub>1</sub>)
+
 # Reading and exporting states
 
 To parse the states use the Python script ``ipeps_io.py`` which can export 
@@ -51,3 +61,4 @@ It is also possible to use ``ipeps_io.py`` script to export U(1)-symmetric state
 block-sparse form. See ``single-site_pg-C4v-A1_internal_U1/README.md``.
 
 [^1]: In practice it is more convenient to instead rotate either operators or reduced density matrices.
+[^2]: both nearest- and next-nearest neighbour spin exchange terms are evaluated in 2x2 patch embedded in CTM environment
